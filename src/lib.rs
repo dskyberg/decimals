@@ -8,6 +8,10 @@ pub trait Decimals {
 
 impl Decimals for f32 {
     fn round(&self, num_decimals: u32) -> Self {
+        if self.abs() > 2_f32.powi(23) {
+            return *self;
+        }
+
         // from u/rundevelopment: f32 and f64 can only represent at most about 8 and 15 decimals respectively.
         // So clamp fract_decimals to that to prevent 10i32.pow(fract_decimals) from overflowing
         let num_decimals = num_decimals.clamp(0, 8);
@@ -18,6 +22,10 @@ impl Decimals for f32 {
 
 impl Decimals for f64 {
     fn round(&self, num_decimals: u32) -> Self {
+        if self.abs() > 2_f64.powi(53) {
+            return *self;
+        }
+
         // from u/rundevelopment: f32 and f64 can only represent at most about 8 and 15 decimals respectively.
         // So clamp fract_decimals to that to prevent 10i32.pow(fract_decimals) from overflowing
         let num_decimals = num_decimals.clamp(0, 15);
