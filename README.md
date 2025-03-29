@@ -10,6 +10,6 @@ But it's not!
 ```rust
 use decimals::Decimals;
 
-assert_eq!(1.23456789.round(2), 1.23);
-assert_eq!(1.23456789.round(3), 1.235);
+assert_eq!(1.23456789.round_to(2), 1.23);
+assert_eq!(1.23456789.round_to(3), 1.235);
 ```

@@ -3,11 +3,11 @@
 pub trait Decimals {
     /// Round the fractional part of a float to `fract_decimals`.  This is not simply a
     /// string trim function.
-    fn round(&self, num_decimals: u32) -> Self;
+    fn round_to(&self, num_decimals: u32) -> Self;
 }
 
 impl Decimals for f32 {
-    fn round(&self, num_decimals: u32) -> Self {
+    fn round_to(&self, num_decimals: u32) -> Self {
         if self.abs() > 2_f32.powi(23) {
             return *self;
         }
@@ -21,7 +21,7 @@ impl Decimals for f32 {
 }
 
 impl Decimals for f64 {
-    fn round(&self, num_decimals: u32) -> Self {
+    fn round_to(&self, num_decimals: u32) -> Self {
         if self.abs() > 2_f64.powi(53) {
             return *self;
         }
@@ -40,7 +40,7 @@ mod tests {
 
     #[test]
     fn test_decimals() {
-        assert_eq!(1.23456789.round(2), 1.23);
-        assert_eq!(1.23456789.round(3), 1.235);
+        assert_eq!(1.23456789.round_to(2), 1.23);
+        assert_eq!(1.23456789.round_to(3), 1.235);
     }
 }
